@@ -2,7 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route,Routes, BrowserRouter } from 'react-router-dom'
 import { Navbar, Sidebar, Footer } from './components'
 
-import {HomePage,AboutPage,ProductsPage,ErrorPage,CartPage,SingleProductPage} from './pages'
+import {HomePage,AboutPage,ProductsPage,ErrorPage,CartPage,SingleProductPage,checkoutPage} from './pages'
+import CheckoutPage from './pages/CheckoutPage'
 
 function App() {
   return <Router>
@@ -11,6 +12,7 @@ function App() {
             <Routes>
               <Route path='/' element={<HomePage/>}/>
               <Route path='about' element={<AboutPage/>}/>
+              <Route path = '/checkout' element = {<CheckoutPage/>}/>
               <Route path='products' element={<ProductsPage/>}>
               </Route>
               <Route path='/products/:id' element={<SingleProductPage/>}/>
