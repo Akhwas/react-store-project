@@ -14,7 +14,7 @@ import {
 } from '../actions'
 import products_reducer from '../reducers/products_reducer'
 
-const initialState = {isSidebarOpen:false}
+const initialState = {isSidebarOpen:false,products_loading:false,products_error:false,products:[],featured:[],}
 
 
 const ProductsContext = React.createContext()
@@ -27,6 +27,27 @@ export const ProductsProvider = ({ children }) => {
   const closeSidebar = () =>{
     dispatch({type:SIDEBAR_CLOSE})
   }
+
+  const fetchProducts =async()=>{
+    try {
+      dispatch({type:GET_PRODUCTS_BEGIN})
+      const response = await axios(url)
+      const products = await response.data
+      console.log(products)
+      const featuredProducts  = products.filter((product)=>product.featured)
+      console.log(featuredProducts)
+      if(products){
+        dispatch({type:GET_PRODUCTS_SUCCESS,payLoad:products})
+        
+      }
+      
+    } catch (error) {
+      dispatch({type:GET_PRODUCTS_ERROR})
+    }
+    
+    
+  } 
+  useEffect(()=>{fetchProducts()},[])
   // if (state = SIDEBAR_CLOSE){
   //   dispatch({type:SIDEBAR_CLOSE})
   // }
