@@ -11,12 +11,18 @@ import {
   CLEAR_FILTERS,
 } from '../actions'
 import { useProductsContext } from './products_context'
+import GridView from '../components/GridView'
+import { FaAllergies, FaBorderNone } from 'react-icons/fa'
 
-const initialState = {}
+// const initialState = {loadProducts:false,view:GridView,updateSort:false,sort:nameAZ,updateFilters:false,filter:all,clearFilters:true}
 
 const FilterContext = React.createContext()
 
 export const FilterProvider = ({ children }) => {
+  const {products} = useProductsContext()
+
+  const [state,dispatch] = useReducer(reducer)
+  
   return (
     <FilterContext.Provider value='filter context'>
       {children}

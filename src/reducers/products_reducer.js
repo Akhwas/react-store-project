@@ -21,9 +21,20 @@ const products_reducer = (state, action) => {
   }
   if(action.type === GET_PRODUCTS_SUCCESS){
 
-    return {...state,products_loading:false,products:action.payLoad,featured:action.payLoad.filter((item)=>item.featured)}
+    return {...state,products_loading:false,products:action.payLoad,featured:action.payLoad.filter((item)=>item.featured)}  
   }
-  // if(action.type === GE)
+  
+  if(action.type === GET_PRODUCTS_ERROR){
+    return {...state,products_loading:false,products_error:true}
+  }
+  if(action.type=== GET_SINGLE_PRODUCT_BEGIN){
+    return {...state,singleProduct_loading:true}
+  }
+  if(action.type === GET_SINGLE_PRODUCT_SUCCESS){
+    // const displayProduct = products.filter((product)=>product.id === action.payLoad)
+    // console.log(displayProduct)
+    return{...state,singleProduct_loading:false,singleProduct:action.payLoad}
+  }
 
   return state
   throw new Error(`No Matching "${action.type}" - action type`)

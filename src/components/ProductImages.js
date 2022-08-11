@@ -1,8 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useProductsContext } from '../context/products_context'
 
 const ProductImages = () => {
-  return <h4>product images</h4>
+  const {singleProduct} = useProductsContext()
+  const {images} = singleProduct.images ||[]
+  console.log(singleProduct['images'][0])
+  // const[image,setImage]=useState('')
+  // console.log(image)
+  return <Wrapper>
+    {/* <img src={image} className='main'></img> */}
+  </Wrapper>
 }
 
 const Wrapper = styled.section`

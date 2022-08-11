@@ -13,9 +13,38 @@ import {
 } from '../components'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const SingleProductPage = () => {
-  return <h4>single product page</h4>
+  const {id} = useParams()
+  const{singleProduct,fetchSingleProduct}=useProductsContext()
+  console.log(singleProduct)
+  const {category,colors,company,description,images,name,price,stock,stars,reviews} = singleProduct || {}
+  
+  
+  useEffect(()=>{fetchSingleProduct(`${url}${id}`)},[])
+  return <Wrapper>
+    <PageHero title = {<Link to='/products'>products / </Link>+`/${name}`}/>
+    <div className='section section-center'>
+      <Link to='/products' className='btn'>back to products</Link>
+      <div className='product-center'>
+        <ProductImages/>
+        <section className='content'>
+          <h2>{name}</h2>
+          <Stars/>
+          <h5>{formatPrice(price)}</h5>
+          <p className='desc'>{description}</p>
+          <p className='info'><span>available : </span>In stock</p>
+          <p className='info'><span>SKU : </span>{id}</p>
+          <p className='info'><span>brand : </span>{company}</p>
+          <hr></hr>
+          <AddToCart/>
+
+        </section>
+      </div>
+    </div>
+
+  </Wrapper>
 }
 
 const Wrapper = styled.main`
