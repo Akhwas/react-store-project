@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory,useNavigate } from 'react-router-dom'
 import { useProductsContext } from '../context/products_context'
 import { single_product_url as url } from '../utils/constants'
 import { formatPrice } from '../utils/helpers'
@@ -17,18 +17,35 @@ import axios from 'axios'
 
 const SingleProductPage = () => {
   const {id} = useParams()
-  const{singleProduct,fetchSingleProduct}=useProductsContext()
-  console.log(singleProduct)
-  const {category,colors,company,description,images,name,price,stock,stars,reviews} = singleProduct || {}
+  const{singleProduct_error:error,singlePorduct_loading:loading,singleProduct,fetchSingleProduct}=useProductsContext()
+  const navigate = useNavigate()
+  // console.log(singleProduct)
+  const {category,colors,company,description,images,name,price,stock,stars,reviews} = singleProduct
+  // let image 
+  // if(images){
+  //   image = images[0]
+  // }
+  // console.log(image)
   
   
-  useEffect(()=>{fetchSingleProduct(`${url}${id}`)},[])
+  useEffect(()=>{fetchSingleProduct(`${url}${id}`)},[loading])
+
+  useEffect(()=>{
+    if(error){
+      setTimeout(()=>{
+        navigate('/')
+        },3000)}
+      },[error])
+  if(loading){
+    return <Loading/>;
+  }
+
   return <Wrapper>
     <PageHero title = {<Link to='/products'>products / </Link>+`/${name}`}/>
     <div className='section section-center'>
       <Link to='/products' className='btn'>back to products</Link>
       <div className='product-center'>
-        <ProductImages/>
+        <ProductImages images = {images}/>
         <section className='content'>
           <h2>{name}</h2>
           <Stars/>

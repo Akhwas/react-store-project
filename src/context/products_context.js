@@ -27,9 +27,7 @@ export const ProductsProvider = ({ children }) => {
   const closeSidebar = () =>{
     dispatch({type:SIDEBAR_CLOSE})
   }
-  const getSingleProduct = ()=>{
-    dispatch({type:GET_SINGLE_PRODUCT_BEGIN})
-  }
+ 
   const fetchProducts =async()=>{
     try {
       dispatch({type:GET_PRODUCTS_BEGIN})
@@ -51,6 +49,7 @@ export const ProductsProvider = ({ children }) => {
   } 
 
   const fetchSingleProduct = async(url)=>{
+    dispatch({type:GET_SINGLE_PRODUCT_BEGIN})
     try {
       const response = await axios(url)
       const data = await response.data

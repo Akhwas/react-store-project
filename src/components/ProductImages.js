@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useProductsContext } from '../context/products_context'
 
-const ProductImages = () => {
-  const {singleProduct} = useProductsContext()
-  const {images} = singleProduct.images ||[]
-  console.log(singleProduct['images'][0])
-  // const[image,setImage]=useState('')
-  // console.log(image)
+const ProductImages = ({images = []}) => {
+  // const {singleProduct} = useProductsContext()
+  console.log(images)
+  const[main, setMain ]=useState(images[0])
+  console.log(main)
+  
   return <Wrapper>
-    {/* <img src={image} className='main'></img> */}
+    <p>ra7metak ya rab</p>
+    {/* <img src={images[0].url} className='main'></img> */}
   </Wrapper>
 }
 
