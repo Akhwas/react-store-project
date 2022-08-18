@@ -19,8 +19,9 @@ const SingleProductPage = () => {
   const {id} = useParams()
   const{singleProduct_error:error,singlePorduct_loading:loading,singleProduct,fetchSingleProduct}=useProductsContext()
   const navigate = useNavigate()
-  // console.log(singleProduct)
+  console.log(singleProduct)
   const {category,colors,company,description,images,name,price,stock,stars,reviews} = singleProduct
+  
   // let image 
   // if(images){
   //   image = images[0]
@@ -48,14 +49,14 @@ const SingleProductPage = () => {
         <ProductImages images = {images}/>
         <section className='content'>
           <h2>{name}</h2>
-          <Stars/>
+          <Stars stars={stars}reviews={reviews}/>
           <h5>{formatPrice(price)}</h5>
           <p className='desc'>{description}</p>
-          <p className='info'><span>available : </span>In stock</p>
+          {stock && <p className='info'><span>available : </span>In stock</p>}
           <p className='info'><span>SKU : </span>{id}</p>
           <p className='info'><span>brand : </span>{company}</p>
           <hr></hr>
-          <AddToCart/>
+          {stock >0 && <AddToCart colors={colors} stock={stock}/>}
 
         </section>
       </div>

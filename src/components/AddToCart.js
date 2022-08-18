@@ -5,8 +5,44 @@ import { FaCheck } from 'react-icons/fa'
 import { useCartContext } from '../context/cart_context'
 import AmountButtons from './AmountButtons'
 
-const AddToCart = () => {
-  return <h4>addToCart </h4>
+const AddToCart = ({colors=[],stock}) => {
+  const[value,setValue]=useState(colors[0])
+  const [amount,setAmount] = useState(1)
+  const increase = ()=>{
+    if(amount === stock){
+      return
+    }
+    else{
+
+      setAmount(amount+1)
+    }
+  }
+  const decrease = ()=>{
+    if (amount === 1){
+      return
+    }
+    else{
+
+      setAmount(amount-1)
+    }
+  }
+ 
+  return <Wrapper>
+    <div className='colors'>
+      <span>colors :</span>
+      <div>
+        {colors.map((color,index)=>{
+          return  <button className={`color-btn ${value==color && 'active'}`} key={index} style={{background:`${colors[index]}`}} onClick={()=>setValue(color)}>{value===color && <FaCheck/>}
+
+          </button>
+      })}
+      </div>
+    </div>
+    <div className='btn-container'>
+      <AmountButtons amount = {amount} increase={increase} decrease = {decrease}/>
+      <Link to='/cart' className='btn'>add to cart</Link>
+    </div>
+  </Wrapper>
 }
 
 const Wrapper = styled.section`

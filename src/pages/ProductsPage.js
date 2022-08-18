@@ -6,8 +6,10 @@ const ProductsPage = () => {
   return <Wrapper>
     <PageHero title='Products'/>
     <Sort/>
-    <Filters/>
-    <ProductList/>
+    <div className='page'>
+      <Filters/>
+      <ProductList/>  
+    </div>
   </Wrapper>
 }
 

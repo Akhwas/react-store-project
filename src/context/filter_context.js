@@ -24,7 +24,7 @@ export const FilterProvider = ({ children }) => {
   const [state,dispatch] = useReducer(reducer)
   
   return (
-    <FilterContext.Provider value='filter context'>
+    <FilterContext.Provider value={{products}}>
       {children}
     </FilterContext.Provider>
   )
