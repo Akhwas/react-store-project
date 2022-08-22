@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFilterContext } from '../context/filter_context'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
 import styled from 'styled-components'
+import { UPDATE_SORT } from '../actions'
 const Sort = () => {
-  return <h4>sort </h4>
+  const {filtered_products,view,selectGrid,selectList,updateSort,sort} = useFilterContext()
+ 
+  return <Wrapper>
+    <div className='btn-container'>
+      <button className={view?'active':''}onClick={selectGrid}><BsFillGridFill/></button>
+      <button className={!view?'active':''} onClick ={selectList}><BsList/></button>
+    </div>
+    <p> {filtered_products.length} products found</p>
+    <hr></hr>
+    <form>
+      <label htmlFor="sort">sort by</label>
+      <select name = 'sort' id = 'sort' className='sort-input' value = {sort} onChange={updateSort}>
+        <option value = 'price-lowest'>price (lowest)</option>
+        <option value= 'price-highest'>price (highest)</option>
+        <option value= 'name (a-z)'>name (a-z)</option>
+        <option value= 'name (z-a)'>name (z-a)</option>
+      </select>
+    </form>
+  </Wrapper>
 }
 
 const Wrapper = styled.section`
