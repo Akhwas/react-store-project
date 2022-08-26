@@ -40,9 +40,9 @@ const Filters = () => {
             
             {colors.map((color,index)=>{
               if (color === 'all'){
-                return <button name = 'color' key = {index} className = {`${color === 'all'? 'all-btn active':'all-btn'}`} data-color = 'all' onClick={updateFilters}>all</button>
+                return <button type='button' name = 'color' key = {index} className = {`${color === 'all'? 'all-btn active':'all-btn'}`} data-color = 'all' onClick={updateFilters}>all</button>
               }
-              return <button name = 'color' key = {index} className = {`${filters.color === color? 'color-btn active':'color-btn'}`} data-color={color} style = {{background:color}} onClick={updateFilters}>{filters.color === color?<FaCheck/>:null}</button>
+              return <button type='button' name = 'color' key = {index} className = {`${filters.color === color? 'color-btn active':'color-btn'}`} data-color={color} style = {{background:color}} onClick={updateFilters}>{filters.color === color?<FaCheck/>:null}</button>
             })}
           </div>
         </div>
