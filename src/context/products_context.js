@@ -53,10 +53,8 @@ export const ProductsProvider = ({ children }) => {
     try {
       const response = await axios(url)
       const data = await response.data
-      
-      if(response){
-        dispatch({type:GET_SINGLE_PRODUCT_SUCCESS,payLoad:data})
-      }
+      dispatch({type:GET_SINGLE_PRODUCT_SUCCESS,payLoad:data})
+    
       
     } catch (error) {
       dispatch({type:GET_SINGLE_PRODUCT_ERROR})

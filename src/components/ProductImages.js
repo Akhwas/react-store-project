@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useProductsContext } from '../context/products_context'
 
-const ProductImages = ({images=[[]]}) => {
+const ProductImages = ({images=[]}) => {
   // const {singleProduct} = useProductsContext()
-  console.log(images)
-  const[main, setMain ]=useState(images[0])
+  console.log(images[0])
+  const [main, setMain] = useState(images[0])
   // if(images){
-  //   setMain(images[0])
+    // setMain(images[0])
   // }
   console.log(main)
   // console.log(images[0].url)

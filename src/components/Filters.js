@@ -5,7 +5,7 @@ import { getUniqueValues, formatPrice } from '../utils/helpers'
 import { FaCheck } from 'react-icons/fa'
 
 const Filters = () => {
-  const {filtered_products,all_products,updateFilters,products,filters} = useFilterContext()
+  const {filtered_products,all_products,updateFilters,products,filters,clearFilters} = useFilterContext()
   let categories = getUniqueValues(all_products,'category')
   let companies = getUniqueValues(all_products,'company')
   let colors = getUniqueValues(all_products,'colors')
@@ -28,9 +28,9 @@ const Filters = () => {
         </div>
         <div className='form-control'>
           <h5>company</h5>
-          <select name = 'company' className = 'company'>
+          <select name = 'company' className = 'company' value={filters.company} onChange = {updateFilters}>
             {companies.map((company,index)=>{
-              return <option key={index} value = {company} onChange={updateFilters}>{company}</option>
+              return <option key={index}  >{company}</option>
             })}
           </select>
         </div>
@@ -49,7 +49,7 @@ const Filters = () => {
           <div className='form-control'>
             <h5>price</h5>
             <p className='price'>{formatPrice(filters.price)}</p>
-            <input type = 'range' name = 'price' min = '0' max = {filters.max_price} value = {filters.price} onChange = {updateFilters}></input>
+            <input type = 'range' name = 'price' min = {filters.min_price} max = {filters.max_price} value = {filters.price} onChange = {updateFilters}></input>
           </div>
           <div className='form-control shipping'>
             <label htmlFor='shipping'>free shipping</label>
@@ -57,7 +57,7 @@ const Filters = () => {
           </div>
         
       </form>
-      <button className='clear-btn' type ='button'>{' '}
+      <button className='clear-btn' type ='button' onClick={clearFilters}>
         clear filters
       </button>
     </div>

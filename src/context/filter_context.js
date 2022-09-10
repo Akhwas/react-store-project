@@ -50,15 +50,20 @@ export const FilterProvider = ({ children }) => {
       value = e.target.dataset.color
     }
     if (name === 'price'){
-      value = Number(e.target.value)
+      value = Number(value)
     }
     if (name === 'shipping'){
       
       value = e.target.checked
     }
+   
     console.log(name,value)
     
     dispatch({type:UPDATE_FILTERS,payLoad:{name,value}})
+  }
+
+  const clearFilters = () =>{
+    dispatch({type:CLEAR_FILTERS})
   }
  
 
@@ -73,7 +78,7 @@ export const FilterProvider = ({ children }) => {
     dispatch({type:SORT_PRODUCTS})
   },[products,state.sort,state.filters])
   return (
-    <FilterContext.Provider value={{...state,selectList,selectGrid,updateSort,updateFilters}}>
+    <FilterContext.Provider value={{...state,selectList,selectGrid,updateSort,updateFilters, clearFilters}}>
       {children}
     </FilterContext.Provider>
   )
